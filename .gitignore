@@ -4,3 +4,9 @@ src/mod/drag-and-drop/drag-and-drop.tkn
 src/mod/drag-and-drop/drag-and-drop.tko
 src/mod/multi-preview-dvx/multi-preview-dvx.tkn
 src/mod/multi-preview-dvx/multi-preview-dvx.tko
+src/mod/rms/*.jar
+src/mod/rms/*/*.axs
+src/incl/rms/RmsApi.axi
+src/incl/rms/RmsEventListener.axi
+src/incl/rms/RmsMathUtil.axi
+src/incl/rms/RmsMonitorCommon.axi
