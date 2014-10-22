@@ -1,0 +1,3 @@
+This directory is for user interface.
+E.g., Images, Sounds, Touch Panel Files, Videos, etc...
+Files should be stored within sub-directories.
