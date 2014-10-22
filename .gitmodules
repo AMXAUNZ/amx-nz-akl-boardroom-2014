@@ -1,0 +1,24 @@
+[submodule "src/lib/amx-pdu-library"]
+	path = src/lib/amx-pdu-library
+	url = https://github.com/AMXAUNZ/amx-pdu-library.git
+[submodule "src/lib/amx-device-library"]
+	path = src/lib/amx-device-library
+	url = https://github.com/AMXAUNZ/amx-device-library.git
+[submodule "src/lib/amx-enzo-library"]
+	path = src/lib/amx-enzo-library
+	url = https://github.com/AMXAUNZ/amx-enzo-library.git
+[submodule "src/lib/amx-modero-library"]
+	path = src/lib/amx-modero-library
+	url = https://github.com/AMXAUNZ/amx-modero-library.git
+[submodule "src/lib/amx-dxlink-library"]
+	path = src/lib/amx-dxlink-library
+	url = https://github.com/AMXAUNZ/amx-dxlink-library.git
+[submodule "src/lib/amx-dvx-library"]
+	path = src/lib/amx-dvx-library
+	url = https://github.com/AMXAUNZ/amx-dvx-library.git
+[submodule "src/lib/common-library"]
+	path = src/lib/common-library
+	url = https://github.com/AMXAUNZ/common-library.git
+[submodule "src/lib/xtra-pc-control"]
+	path = src/lib/xtra-pc-control
+	url = https://github.com/AMXAUNZ/xtra-pc-control.git
