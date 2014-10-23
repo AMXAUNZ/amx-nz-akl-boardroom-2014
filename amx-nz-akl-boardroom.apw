@@ -140,6 +140,11 @@
 <FilePathName>C:\Program Files (x86)\Common Files\AMXShare\AXIs\SNAPI.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Other"><Identifier>NEC P402 Interface</Identifier>
+<FilePathName>doc\man\NEC P402 Interface.doc</FilePathName>
+<Comments></Comments>
+<MasterDirectory>\</MasterDirectory>
+</File>
 <File CompileType="Netlinx" Type="IR"><Identifier>PANAS218</Identifier>
 <FilePathName>ir\PANAS218.IRL</FilePathName>
 <Comments></Comments>
