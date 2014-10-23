@@ -625,6 +625,15 @@ integer CAMERA_PRESET_1 = 1
 integer CAMERA_PRESET_2 = 2
 integer CAMERA_PRESET_3 = 3
 
+/*
+ * --------------------
+ * IP Addresses
+ * --------------------
+ */
+
+char IP_ADDRESS_MONITOR_LEFT[]  = '192.168.9.199'
+char IP_ADDRESS_MONITOR_RIGHT[] = '192.168.9.198'
+
 
 /*
  * --------------------

@@ -55,6 +55,12 @@ integer DEV_ID_DUET_MODULE_VIRTUAL_LIGHTING         = 41004
  // Virtual device main port
 integer PORT_VIRTUAL_MAIN       = 1
 
+// IP socket device ports (note: IP socket ports start at 2)
+integer PORT_IP_SOCKET_LIGHTING      = 2
+integer PORT_IP_SOCKET_WAKE_ON_LAN   = 3
+integer PORT_IP_SOCKET_MONITOR_LEFT  = 4
+integer PORT_IP_SOCKET_MONITOR_RIGHT = 5
+
 // Touch Panel Ports
 integer PORT_TP_MAIN            = 1
 integer PORT_TP_LIGHTING        = 2
@@ -294,16 +300,16 @@ dvDvxIos    = DEV_ID_DVX_CONTROLLER:PORT_DVX_IOS:SYS_MASTER
 
 
 // Lighting
-dvLighting  = DEV_ID_MASTER:2:SYS_MASTER // This device should be used as the physical device by the COMM module
+dvLighting  = DEV_ID_MASTER:PORT_IP_SOCKET_LIGHTING:SYS_MASTER // This device should be used as the physical device by the COMM module
 vdvLighting = DEV_ID_DUET_MODULE_VIRTUAL_LIGHTING:PORT_VIRTUAL_MAIN:SYS_MASTER  // The COMM module should use this as its duet device
 
 // IP socket for wake on lan
-dvIpSocketWakeOnLan = DEV_ID_MASTER:3:SYS_MASTER
+dvIpSocketWakeOnLan = DEV_ID_MASTER:PORT_IP_SOCKET_WAKE_ON_LAN:SYS_MASTER
 
 // Monitors
-dvMonitorLeft   = dvRxMonitorLeftSerial
+dvMonitorLeft   = DEV_ID_MASTER:PORT_IP_SOCKET_MONITOR_LEFT:SYS_MASTER
 vdvMonitorLeft  = DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_LEFT:PORT_VIRTUAL_MAIN:SYS_MASTER
-dvMonitorRight  = dvRxMonitorRightSerial
+dvMonitorRight  = DEV_ID_MASTER:PORT_IP_SOCKET_MONITOR_RIGHT:SYS_MASTER
 vdvMonitorRight = DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_RIGHT:PORT_VIRTUAL_MAIN:SYS_MASTER
 
 // RMS

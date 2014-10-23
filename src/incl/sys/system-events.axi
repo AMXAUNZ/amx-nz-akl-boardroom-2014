@@ -31,6 +31,10 @@ define_event
  */
 
 
+
+
+
+
 #if_defined __BOARDROOM_LOCATION_AKL__
 data_event[dvDvxMain]
 {
@@ -109,6 +113,28 @@ data_event[dvBluray]
 	}
 }
 
+
+data_event[vdvMonitorLeft]
+{
+	online:
+	{
+		// configure module for IP comms
+		sendCommand (vdvMonitorLeft, "'PROPERTY-IP_Address,',IP_ADDRESS_MONITOR_LEFT")
+		sendCommand (vdvMonitorLeft, 'REINIT')
+	}
+}
+
+
+
+data_event[vdvMonitorRight]
+{
+	online:
+	{
+		// configure module for IP comms
+		sendCommand (vdvMonitorRight, "'PROPERTY-IP_Address,',IP_ADDRESS_MONITOR_RIGHT")
+		sendCommand (vdvMonitorRight, 'REINIT')
+	}
+}
 
 data_event[dvTpTableMain]
 {
