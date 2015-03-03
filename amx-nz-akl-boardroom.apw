@@ -181,6 +181,10 @@
 <FilePathName>src\incl\rms\RmsMonitorCommon.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Include"><Identifier>RmsSourceUsage</Identifier>
+<FilePathName>src\incl\rms\RmsSourceUsage.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>snapi-display-control</Identifier>
 <FilePathName>src\incl\snapi-control\snapi-display-control.axi</FilePathName>
 <Comments></Comments>
@@ -395,6 +399,10 @@
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsPowerDistributionUnitMonitor</Identifier>
 <FilePathName>src\mod\rms\monitors\RmsPowerDistributionUnitMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSourceUsageMonitor</Identifier>
+<FilePathName>src\mod\rms\monitors\RmsSourceUsageMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>

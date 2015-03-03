@@ -432,18 +432,55 @@ define_function showSourceOnDisplay (integer input, integer output)
 	
 	// disable any test patterns on the output of the dvx
 	// turn on the monitor
+	// track source usage
 	select
 	{
 		active (output == dvDvxVidOutMonitorLeft.port):
 		{
 			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_OFF)
 			turnOnDisplay (vdvMonitorLeft)
+			
+			// if we have something routed to this output already
+			if (selectedVideoInputMonitorLeft != DVX_PORT_VID_IN_NONE)
+			{
+				// if we're switching to an input which is not already routed to this output
+				if (input != selectedVideoInputMonitorLeft)
+				{
+					// check if the input currently routed to this output is NOT on the other output
+					if (selectedVideoInputMonitorLeft != selectedVideoInputMonitorRight)
+					{
+						// deactivate the source usage that is currently on this input (the actual switch hasn' happened yet)
+						RmsSourceUsageDeactivateSource (selectedVideoInputMonitorLeft)
+					}
+				}
+			}
+			
+			// activate the source usage for the selected input
+			RmsSourceUsageActivateSource (input)
 		}
 		
 		active (output == dvDvxVidOutMonitorRight.port):
 		{
 			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_OFF)
 			turnOnDisplay (vdvMonitorRight)
+			
+			// if we have something routed to this output already
+			if (selectedVideoInputMonitorRight != DVX_PORT_VID_IN_NONE)
+			{
+				// if we're switching to an input which is not already routed to this output
+				if (input != selectedVideoInputMonitorRight)
+				{
+					// check if the input currently routed to this output is NOT on the other output
+					if (selectedVideoInputMonitorLeft != selectedVideoInputMonitorRight)
+					{
+						// deactivate the source usage that is currently on this input (the actual switch hasn' happened yet)
+						RmsSourceUsageDeactivateSource (selectedVideoInputMonitorRight)
+					}
+				}
+			}
+			
+			// activate the source usage for the selected input
+			RmsSourceUsageActivateSource (input)
 		}
 	}
 	
@@ -474,6 +511,9 @@ define_function shutdownAvSystem ()
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMultiPreview.port)
 
+	// deactivate all source usage
+	RmsSourceUsageDeactivateAllSources()
+	
 	// Audio - Switch input "none" to the speaker output on the DVX, unmute the audio and reset the volume to a base level for next use
 	dvxSwitchAudioOnly (dvDvxMain, DVX_PORT_AUD_IN_NONE, dvDvxAudOutSpeakers.port)
 	dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
@@ -646,6 +686,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 		// set the flag to show that the audio is following the left screen
 		audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
 
+		// activate the source usage for the selected input
+		RmsSourceUsageActivateSource (input)
+
 		// lower the shades, raise the blockouts
 		amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_CORNER_WINDOW_UP)
 		amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_UP)
@@ -701,6 +744,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 		// route the DVX input for this TX to the DVX output for the left monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
 
+		// activate the source usage for the selected input
+		RmsSourceUsageActivateSource (input)
+
 		// audio
 		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
 		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
@@ -737,7 +783,10 @@ define_function tableInputDetected (dev dvTxVidIn)
 
 		// route the DVX input for this TX to the DVX output for the right monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
-
+		
+		// activate the source usage for the selected input
+		RmsSourceUsageActivateSource (input)
+		
 		// audio
 		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
 		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
@@ -1080,6 +1129,14 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 				{
 					snapiDisplayDisablePower (vdvMonitorLeft)
 					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
+					
+					// check if the input currently switched to this output is NOT on the other output
+					if (selectedVideoInputMonitorLeft != selectedVideoInputMonitorRight)
+					{
+						// deactivate the source usage that is currently on this input (the actual switch hasn' happened yet)
+						RmsSourceUsageDeactivateSource (selectedVideoInputMonitorLeft)
+					}
+					
 					off [selectedVideoInputMonitorLeft]
 
 					if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
@@ -1106,6 +1163,14 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 				{
 					snapiDisplayDisablePower (vdvMonitorRight)
 					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
+					
+					// check if the input currently switched to this output is NOT on the other output
+					if (selectedVideoInputMonitorLeft != selectedVideoInputMonitorRight)
+					{
+						// deactivate the source usage that is currently on this input (the actual switch hasn' happened yet)
+						RmsSourceUsageDeactivateSource (selectedVideoInputMonitorRight)
+					}
+					
 					off [selectedVideoInputMonitorRight]
 
 					if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
