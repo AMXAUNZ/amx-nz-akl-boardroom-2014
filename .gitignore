@@ -10,3 +10,4 @@ src/incl/rms/RmsApi.axi
 src/incl/rms/RmsEventListener.axi
 src/incl/rms/RmsMathUtil.axi
 src/incl/rms/RmsMonitorCommon.axi
+src/incl/rms/RmsSourceUsage.axi
